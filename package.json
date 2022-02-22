@@ -1,10 +1,13 @@
 {
   "name": "http-client-vhi-test",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Http Client",
   "main": "httpClient.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "start": "nodemon --experimental-modules index.js"
   },
   "repository": {
     "type": "git",
@@ -16,12 +19,18 @@
     "url": "https://github.com/eamonnprwalsh/http-client/issues"
   },
   "homepage": "https://github.com/eamonnprwalsh/http-client#readme",
-  "devDependencies": {
-    "@types/node": "^17.0.17",
-    "@types/underscore": "^1.11.4",
-    "typescript": "^4.5.5"
-  },
   "dependencies": {
+    "axios": "^0.26.0",
     "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.2",
+    "jest": "^27.5.1",
+    "regenerator-runtime": "^0.13.9",
+    "typescript": "^4.5.5",
+    "@types/node": "^17.0.17",
+    "@types/underscore": "^1.11.4"
   }
 }

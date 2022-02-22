@@ -1,43 +1,30 @@
-import { TIMEOUT_SEC } from './config.js';
+import { TIMEOUT_MS } from './config.js';
+import axios from 'axios';
 
-export const GET = async function (url) {
-  try {
-    const fetchPromise = fetch(url);
-    const result = await Promise.race([fetchPromise, timeout(TIMEOUT_SEC)]);
-    const data = await result.json();
-
-    if (!result.ok) throw new Error(`${data.message} (${result.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
+export const GET = async (url) => {
+  const response = await axios({ method: 'get', url: url, timeout: TIMEOUT_MS }).catch((error) => {
+    throw new Error(error);
+  });
+  return response;
 };
 
-export const POST = async function (url, postData) {
-  try {
-    const fetchPromise = fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    });
-
-    const result = await Promise.race([fetchPromise, timeout(TIMEOUT_SEC)]);
-    const data = await result.json();
-
-    if (!result.ok) throw new Error(`${data.message} (${result.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
+export const POST = async (url, postData) => {
+  const response = await axios({ method: 'post', url: url, data: postData, timeout: TIMEOUT_MS }).catch((error) => {
+    throw new Error(error);
+  });
+  return response;
 };
 
-const timeout = function (s) {
-    return new Promise(function (_, reject) {
-      setTimeout(function () {
-        reject(new Error(`Request took too long! Timeout after ${s} second`));
-      }, s * 1000);
-    });
-  };
-  
+export const PUT = async (url, putData) => {
+  const response = await axios({ method: 'put', url: url, data: putData, timeout: TIMEOUT_MS }).catch((error) => {
+    throw new Error(error);
+  });
+  return response;
+};
+
+export const DELETE = async (url) => {
+  const response = await axios({ method: 'delete', url: url, timeout: TIMEOUT_MS }).catch((error) => {
+    throw new Error(error);
+  });
+  return response;
+};

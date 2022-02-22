@@ -1,1 +1,1 @@
-export const TIMEOUT_SEC = 10;
+export const TIMEOUT_MS = 10000;
